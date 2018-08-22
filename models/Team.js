@@ -2,7 +2,7 @@ module.exports = (sequelize,DataTypes) => {
     const Team = sequelize.define('team',{
         id : {
             type : DataTypes.INTEGER(),
-            autoincrement : true,
+            autoIncrement : true,
             primaryKey : true
         },
         name : {

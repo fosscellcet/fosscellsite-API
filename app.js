@@ -17,14 +17,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use('/',require('./routes'));
+
 sequelize.sync()
     .then(() => {
         app.listen(3000);
         console.log('Server started in port 3000');
     }
-)
-
-//app.use('/', indexRouter);
-//app.use('/users', usersRouter);
+);
 
 module.exports = app;
