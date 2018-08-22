@@ -9,5 +9,5 @@ router.get('/', (req,res,next) => {
 
 router.use('/team',require('./team'));
 router.use('/events', require('./events'));
-
+router.use('/blog', require('./blog'))
 module.exports = router;

@@ -1,9 +1,9 @@
 var model = require('../models').events;
 const Promise = require('bluebird');
 const Joi = require('joi');
-eventMethods = {}
+eventController = {}
 
-eventMethods.getAllEvents = () => new Promise((resolve, reject) => {
+eventController.getAllEvents = () => new Promise((resolve, reject) => {
     model.findAll()
         .then((events) => {
             resolve(events);
@@ -13,7 +13,7 @@ eventMethods.getAllEvents = () => new Promise((resolve, reject) => {
         });
 });
 
-eventMethods.getEventByDate = (date) => new Promise((resolve, reject) => {
+eventController.getEventByDate = (date) => new Promise((resolve, reject) => {
     model.findAll({
         where : {
             date : new Date(date)
@@ -27,7 +27,7 @@ eventMethods.getEventByDate = (date) => new Promise((resolve, reject) => {
     })
 })
 
-eventMethods.addEvent = (data) => new Promise((resolve, reject) => {
+eventController.addEvent = (data) => new Promise((resolve, reject) => {
     const schema = Joi.object().keys({
         name : Joi.string().required(),
         description : Joi.string().required(),
@@ -43,4 +43,4 @@ eventMethods.addEvent = (data) => new Promise((resolve, reject) => {
         .catch((err) => reject(err));
 });
 
-module.exports = eventMethods;
+module.exports = eventController;

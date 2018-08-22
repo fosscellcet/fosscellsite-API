@@ -2,9 +2,9 @@ var model = require('../models').team;
 var Promise = require('bluebird');
 var Joi = require('joi');
 
-teamMethods = {};
+teamController = {};
 
-teamMethods.getAllTeamMembers = () => new Promise((resolve,reject) => {
+teamController.getAllTeamMembers = () => new Promise((resolve,reject) => {
         model.findAll()
             .then((teamMembers) => {
                 resolve(teamMembers);
@@ -14,7 +14,7 @@ teamMethods.getAllTeamMembers = () => new Promise((resolve,reject) => {
             });
     });
 
-teamMethods.addTeamMember = (member) => new Promise((resolve,reject) => {
+teamController.addTeamMember = (member) => new Promise((resolve,reject) => {
     var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif)$");
     const schema = Joi.object().keys({
         // Name is a required string
@@ -44,5 +44,5 @@ teamMethods.addTeamMember = (member) => new Promise((resolve,reject) => {
             reject(err);
         });    
 });
-module.exports = teamMethods;
+module.exports = teamController;
 
