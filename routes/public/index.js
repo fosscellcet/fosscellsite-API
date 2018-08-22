@@ -8,5 +8,6 @@ router.get('/', (req,res,next) => {
 });
 
 router.use('/team',require('./team'));
+router.use('/events', require('./events'));
 
 module.exports = router;

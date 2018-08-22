@@ -23,42 +23,19 @@ router.get('/', function(req,res,next){
         });
 });
 router.post('/',(req,res,next) => {
-    var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif)$");
-    const schema = Joi.object().keys({
-        // Name is a required string
-        name : Joi.string().required(),
-
-        //Designation is a required string
-        designation : Joi.string().required(),
-
-        //Quote is a string
-        quote : Joi.string(),
-
-        /*Image name should be string
-          It should be of jpg or jpeg format */
-        image : Joi.string().regex(regex).required()
-    });
-    Joi.validate(req.body, schema)
-        .then((value) => {
-            controller.addTeamMember(req.body)
-                .then((newMember) => {
-                    res.json({
-                        status : "OK",
-                        newMember
-                    })
-                })
-                .catch((err) => {
-                    res.json({
-                        status : "error",
-                        error : err.message
-                    });
-                })
+    controller.addTeamMember(req.body)
+        .then((newMember) => {
+            res.status(201);
+            res.json({
+                status : "OK",
+                newMember
+            })
         })
         .catch((err) => {
             res.json({
                 status : "error",
                 error : err.message
             });
-        });
+        })
 });
 module.exports = router;
