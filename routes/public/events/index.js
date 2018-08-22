@@ -22,5 +22,21 @@ router.get('/',(req, res, next) => {
             })
         })
 });
-
+router.get('/:date',(req,res,next) => {
+    controller.getEventByDate(req.params.date)
+    .then((events) => {
+        res.send({
+            status : "OK Date",
+            events
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(400);
+        res.send({
+            status : "error",
+            error : err.message
+        })
+    })
+});
 module.exports = router;
